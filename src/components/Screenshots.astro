@@ -77,17 +77,62 @@ const screenshots = [
 
       <!-- Screenshots Carousel with peek views -->
       <div id="carousel" class="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 scrollbar-hide px-[5%] sm:px-[10%]">
+        <!-- Clone of second-to-last slide (for peek context) -->
+        <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300" data-clone="true" data-real-index={screenshots.length - 2}>
+          <div class="group relative">
+            <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                <span class="text-xs font-semibold text-slate-200">Step {screenshots.length - 1} of {screenshots.length}</span>
+              </div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src={screenshots[screenshots.length - 2].src}
+                alt={screenshots[screenshots.length - 2].alt}
+                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-4 text-center text-sm font-medium text-slate-300">
+              {screenshots[screenshots.length - 2].caption}
+            </p>
+          </div>
+        </div>
+
+        <!-- Clone of last slide (for seamless backward wrap) -->
+        <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300" data-clone="true" data-real-index={screenshots.length - 1}>
+          <div class="group relative">
+            <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                <span class="text-xs font-semibold text-slate-200">Step {screenshots.length} of {screenshots.length}</span>
+              </div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src={screenshots[screenshots.length - 1].src}
+                alt={screenshots[screenshots.length - 1].alt}
+                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-4 text-center text-sm font-medium text-slate-300">
+              {screenshots[screenshots.length - 1].caption}
+            </p>
+          </div>
+        </div>
+
+        <!-- Real slides -->
         {screenshots.map((screenshot, index) => (
-          <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300">
+          <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300" data-real-index={index}>
             <div class="group relative">
-              <!-- Step Indicator -->
               <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
                 <div class="flex items-center gap-1.5">
                   <div class="w-2 h-2 rounded-full bg-purple-400"></div>
                   <span class="text-xs font-semibold text-slate-200">Step {index + 1} of {screenshots.length}</span>
                 </div>
               </div>
-
               <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
                 <img
                   src={screenshot.src}
@@ -102,6 +147,52 @@ const screenshots = [
             </div>
           </div>
         ))}
+
+        <!-- Clone of first slide (for seamless forward wrap) -->
+        <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300" data-clone="true" data-real-index="0">
+          <div class="group relative">
+            <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                <span class="text-xs font-semibold text-slate-200">Step 1 of {screenshots.length}</span>
+              </div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src={screenshots[0].src}
+                alt={screenshots[0].alt}
+                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-4 text-center text-sm font-medium text-slate-300">
+              {screenshots[0].caption}
+            </p>
+          </div>
+        </div>
+
+        <!-- Clone of second slide (for peek context) -->
+        <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300" data-clone="true" data-real-index="1">
+          <div class="group relative">
+            <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
+              <div class="flex items-center gap-1.5">
+                <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                <span class="text-xs font-semibold text-slate-200">Step 2 of {screenshots.length}</span>
+              </div>
+            </div>
+            <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <img
+                src={screenshots[1].src}
+                alt={screenshots[1].alt}
+                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                loading="lazy"
+              />
+            </div>
+            <p class="mt-4 text-center text-sm font-medium text-slate-300">
+              {screenshots[1].caption}
+            </p>
+          </div>
+        </div>
       </div>
 
       <!-- Navigation Dots -->
@@ -123,17 +214,17 @@ const screenshots = [
       const dots = document.querySelectorAll('.dot');
       const slides = document.querySelectorAll('.carousel-slide');
 
-      let currentIndex = 0;
-      const totalSlides = dots.length;
+      const totalRealSlides = dots.length;
+      let currentIndex = 2; // Start at first real slide (index 2 because 0,1 are clones)
+      let isScrolling = false;
 
       function getCurrentSlideIndex() {
-        if (!carousel || !slides.length) return 0;
+        if (!carousel || !slides.length) return 2;
 
-        // Find which slide is closest to the center of the viewport
         const carouselRect = carousel.getBoundingClientRect();
         const carouselCenter = carouselRect.left + carouselRect.width / 2;
 
-        let closestIndex = 0;
+        let closestIndex = 2;
         let closestDistance = Infinity;
 
         slides.forEach((slide, index) => {
@@ -150,22 +241,82 @@ const screenshots = [
         return closestIndex;
       }
 
-      function scrollToSlide(index) {
-        if (carousel && slides.length > 0) {
-          const slide = slides[index];
-          if (slide) {
-            slide.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'center'
-            });
-          }
+      function goToSlide(index) {
+        if (carousel && slides[index]) {
+          currentIndex = index;
+          slides[index].scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+          });
+        }
+      }
+
+      function handleInfiniteLoop() {
+        if (isScrolling || !carousel) return;
+
+        // Check if we've scrolled to a clone
+        const physicalIndex = getCurrentSlideIndex();
+
+        // Structure: [Clone6, Clone7, Real1, Real2, ..., Real7, Clone1, Clone2]
+        // We want to jump when on Clone7 (index 1) or Clone1 (index totalRealSlides+2)
+
+        if (physicalIndex === 1) {
+          // On clone of last slide (slide 7) - jump to real last slide
+          isScrolling = true;
+
+          const realSlide = slides[totalRealSlides + 1]; // Real slide 7 is at physical index totalRealSlides+1
+          const slideRect = realSlide.getBoundingClientRect();
+          const carouselRect = carousel.getBoundingClientRect();
+          const offset = slideRect.left - carouselRect.left;
+          const targetScrollLeft = carousel.scrollLeft + offset;
+
+          carousel.classList.remove('scroll-smooth');
+          carousel.style.scrollSnapType = 'none';
+
+          carousel.scrollLeft = targetScrollLeft;
+          currentIndex = totalRealSlides + 1;
+
+          requestAnimationFrame(() => {
+            carousel.style.scrollSnapType = '';
+            carousel?.classList.add('scroll-smooth');
+            isScrolling = false;
+          });
+
+        } else if (physicalIndex === totalRealSlides + 2) {
+          // On clone of first slide (slide 1) - jump to real first slide
+          isScrolling = true;
+
+          const realSlide = slides[2]; // Real slide 1 is at physical index 2
+          const slideRect = realSlide.getBoundingClientRect();
+          const carouselRect = carousel.getBoundingClientRect();
+          const offset = slideRect.left - carouselRect.left;
+          const targetScrollLeft = carousel.scrollLeft + offset;
+
+          carousel.classList.remove('scroll-smooth');
+          carousel.style.scrollSnapType = 'none';
+
+          carousel.scrollLeft = targetScrollLeft;
+          currentIndex = 2;
+
+          requestAnimationFrame(() => {
+            carousel.style.scrollSnapType = '';
+            carousel?.classList.add('scroll-smooth');
+            isScrolling = false;
+          });
         }
       }
 
       function updateDots() {
+        // Map physical index to logical dot index (0-6)
+        // Physical: [Clone6, Clone7, Real1, Real2, ..., Real7, Clone1, Clone2]
+        // Indices:  [0,      1,      2,     3,     ..., 8,     9,      10]
+        let dotIndex = currentIndex - 2; // Subtract 2 because index 2 = real slide 0
+        if (dotIndex < 0) dotIndex = totalRealSlides + dotIndex;
+        if (dotIndex >= totalRealSlides) dotIndex = dotIndex - totalRealSlides;
+
         dots.forEach((dot, index) => {
-          if (index === currentIndex) {
+          if (index === dotIndex) {
             dot.classList.remove('bg-slate-600');
             dot.classList.add('bg-purple-400');
           } else {
@@ -181,19 +332,28 @@ const screenshots = [
       }
 
       // Update on scroll
+      let scrollTimeout: ReturnType<typeof setTimeout>;
       carousel?.addEventListener('scroll', () => {
         updateCarousel();
+
+        // Clear existing timeout
+        clearTimeout(scrollTimeout);
+
+        // Wait for scroll animation to fully complete (CSS transition is ~300ms)
+        scrollTimeout = setTimeout(() => {
+          handleInfiniteLoop();
+        }, 400);
       });
 
       prevBtn?.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          scrollToSlide(currentIndex - 1);
+        if (!isScrolling && currentIndex > 0) {
+          goToSlide(currentIndex - 1);
         }
       });
 
       nextBtn?.addEventListener('click', () => {
-        if (currentIndex < totalSlides - 1) {
-          scrollToSlide(currentIndex + 1);
+        if (!isScrolling && currentIndex < slides.length - 1) {
+          goToSlide(currentIndex + 1);
         }
       });
 
@@ -203,7 +363,14 @@ const screenshots = [
         });
       });
 
-      // Initialize
+      // Initialize - start on first real slide (index 2 in physical array)
+      if (carousel && slides.length > 2) {
+        slides[2].scrollIntoView({
+          behavior: 'auto',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
       updateCarousel();
     </script>
 
