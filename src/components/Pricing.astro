@@ -1,5 +1,15 @@
 ---
 import { pricingTiers, pricingNotes } from '../data/pricing';
+
+const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
+
+// Replace production URLs with environment-aware URLs
+const tiersWithEnvUrl = pricingTiers.map(tier => ({
+  ...tier,
+  ctaLink: tier.ctaLink.startsWith('mailto:')
+    ? tier.ctaLink
+    : tier.ctaLink.replace('https://app.codescribeai.com', appUrl)
+}));
 ---
 
 <section id="pricing" class="py-20 sm:py-24 bg-gradient-to-b from-slate-900 to-slate-950">
@@ -14,7 +24,7 @@ import { pricingTiers, pricingNotes } from '../data/pricing';
     </div>
 
     <div class="grid md:grid-cols-4 gap-4 lg:gap-5">
-      {pricingTiers.map(tier => (
+      {tiersWithEnvUrl.map(tier => (
         <div class={`relative p-5 rounded-2xl transition-all duration-300 flex flex-col ${
           tier.highlight
             ? 'bg-slate-700/50 backdrop-blur-sm border-2 border-purple-500/50 shadow-lg hover:shadow-xl hover:-translate-y-1'
