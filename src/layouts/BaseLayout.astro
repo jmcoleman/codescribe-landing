@@ -35,5 +35,12 @@ const {
   </head>
   <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
     <slot />
+    <script>
+      // Ensure page starts at top on load/refresh
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+    </script>
   </body>
 </html>

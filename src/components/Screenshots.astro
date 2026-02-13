@@ -365,11 +365,12 @@ const screenshots = [
 
       // Initialize - start on first real slide (index 2 in physical array)
       if (carousel && slides.length > 2) {
-        slides[2].scrollIntoView({
-          behavior: 'auto',
-          block: 'nearest',
-          inline: 'center'
-        });
+        // Scroll within carousel only, don't affect page scroll
+        const slide = slides[2];
+        const slideRect = slide.getBoundingClientRect();
+        const carouselRect = carousel.getBoundingClientRect();
+        const offset = slideRect.left - carouselRect.left;
+        carousel.scrollLeft = carousel.scrollLeft + offset;
       }
       updateCarousel();
     </script>
