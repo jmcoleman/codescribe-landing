@@ -81,7 +81,7 @@ export const pricingTiers: PricingTier[] = [
       "Priority support"
     ],
     cta: "Contact Sales",
-    ctaLink: "https://app.codescribeai.com/contact",
+    ctaLink: "https://app.codescribeai.com/contact?source=sales-team",
     highlight: false,
     annualPrice: "$165/month",
     annualTotal: "$1,980/year",
@@ -109,7 +109,7 @@ export const pricingTiers: PricingTier[] = [
       "Priority enterprise support"
     ],
     cta: "Contact Sales",
-    ctaLink: "https://app.codescribeai.com/contact",
+    ctaLink: "https://app.codescribeai.com/contact?source=sales-enterprise",
     highlight: false
   }
 ];
