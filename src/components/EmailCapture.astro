@@ -1,5 +1,6 @@
 ---
 // Email capture - lead generation for visitors not ready to signup
+const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
 ---
 
 <section class="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 border-y border-slate-800">
@@ -22,7 +23,7 @@
       <form
         id="email-capture-form"
         class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto"
-        action="https://app.codescribeai.com/api/newsletter/subscribe"
+        action={`${appUrl}/api/newsletter/subscribe`}
         method="POST"
       >
         <input
