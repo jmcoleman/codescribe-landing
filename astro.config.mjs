@@ -1,27 +1,24 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import { loadEnv } from 'vite';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
+// Use environment variable with fallback to production URL
+const appUrl = process.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
+
 // https://astro.build/config
-export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '');
-  const appUrl = env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
+export default defineConfig({
+  vite: {
+    plugins: [tailwindcss()]
+  },
 
-  return {
-    vite: {
-      plugins: [tailwindcss()]
-    },
+  integrations: [react()],
 
-    integrations: [react()],
-
-    // Redirect common app routes to subdomain
-    redirects: {
-      '/signup': `${appUrl}/signup`,
-      '/login': `${appUrl}/login`,
-      '/app': appUrl,
-    }
-  };
+  // Redirect common app routes to subdomain
+  redirects: {
+    '/signup': `${appUrl}/signup`,
+    '/login': `${appUrl}/login`,
+    '/app': appUrl,
+  }
 });
