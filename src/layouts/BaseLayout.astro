@@ -36,11 +36,23 @@ const {
   <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
     <slot />
     <script>
-      // Ensure page starts at top on load/refresh
+      // Handle page scroll on load/refresh
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      window.scrollTo(0, 0);
+
+      // Check for hash in URL and scroll to that section, otherwise scroll to top
+      const hash = window.location.hash;
+      if (hash) {
+        setTimeout(() => {
+          const element = document.querySelector(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 100);
+      } else {
+        window.scrollTo(0, 0);
+      }
     </script>
   </body>
 </html>
