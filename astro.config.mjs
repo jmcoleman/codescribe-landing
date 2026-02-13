@@ -1,21 +1,27 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { loadEnv } from 'vite';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
 // https://astro.build/config
-export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()]
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const appUrl = env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
 
-  integrations: [react()],
+  return {
+    vite: {
+      plugins: [tailwindcss()]
+    },
 
-  // Redirect common app routes to subdomain
-  redirects: {
-    '/signup': 'https://app.codescribeai.com/signup',
-    '/login': 'https://app.codescribeai.com/login',
-    '/app': 'https://app.codescribeai.com',
-  }
+    integrations: [react()],
+
+    // Redirect common app routes to subdomain
+    redirects: {
+      '/signup': `${appUrl}/signup`,
+      '/login': `${appUrl}/login`,
+      '/app': appUrl,
+    }
+  };
 });
