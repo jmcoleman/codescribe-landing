@@ -1,0 +1,39 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "CodeScribe AI - AI-Powered Documentation Generator",
+  description = "Transform code into production-ready documentation with AI quality scoring, multi-file analysis, and GitHub integration. Support for 16 languages."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://codescribeai.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <link rel="canonical" href="https://codescribeai.com" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+    <slot />
+  </body>
+</html>
