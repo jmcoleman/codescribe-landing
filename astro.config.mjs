@@ -17,7 +17,5 @@ export default defineConfig({
     '/signup': 'https://app.codescribeai.com/signup',
     '/login': 'https://app.codescribeai.com/login',
     '/app': 'https://app.codescribeai.com',
-    '/legal/privacy': 'https://app.codescribeai.com/privacy',
-    '/legal/terms': 'https://app.codescribeai.com/terms',
   }
 });
