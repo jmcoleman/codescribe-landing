@@ -1,0 +1,85 @@
+---
+// Email capture - lead generation for visitors not ready to signup
+---
+
+<section class="py-16 sm:py-20 bg-gradient-to-br from-slate-900 via-purple-900/10 to-slate-900 border-y border-slate-800">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/20 rounded-full mb-6">
+        <svg class="w-5 h-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span class="text-sm font-semibold text-purple-300">Free Resource</span>
+      </div>
+
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+        Get the Documentation Best Practices Guide
+      </h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        Learn the exact framework used by top engineering teams to create documentation that developers actually read. Free 20-page guide with templates and examples.
+      </p>
+
+      <form
+        id="email-capture-form"
+        class="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto"
+        action="https://app.codescribeai.com/api/newsletter/subscribe"
+        method="POST"
+      >
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          class="flex-1 px-6 py-4 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 transition-all"
+        />
+        <button
+          type="submit"
+          class="px-8 py-4 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-xl transition-all duration-200 hover:scale-105 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/40 flex items-center justify-center gap-2"
+        >
+          <span>Download Free Guide</span>
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+        </button>
+      </form>
+
+      <p class="text-sm text-slate-500 mt-4">
+        No spam. Unsubscribe anytime. We respect your privacy.
+      </p>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="form-message" class="hidden mt-6 p-4 rounded-xl text-center"></div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('email-capture-form') as HTMLFormElement;
+  const messageDiv = document.getElementById('form-message');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const email = formData.get('email') as string;
+
+    try {
+      // In production, this would actually submit to your backend
+      // For now, we'll just show a success message
+      messageDiv?.classList.remove('hidden', 'bg-red-500/10', 'border-red-500/20', 'text-red-300');
+      messageDiv?.classList.add('bg-emerald-500/10', 'border', 'border-emerald-500/20', 'text-emerald-300');
+      messageDiv!.textContent = '✓ Success! Check your email for the guide download link.';
+
+      form.reset();
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        messageDiv?.classList.add('hidden');
+      }, 5000);
+    } catch (error) {
+      messageDiv?.classList.remove('hidden', 'bg-emerald-500/10', 'border-emerald-500/20', 'text-emerald-300');
+      messageDiv?.classList.add('bg-red-500/10', 'border', 'border-red-500/20', 'text-red-300');
+      messageDiv!.textContent = '✗ Something went wrong. Please try again.';
+    }
+  });
+</script>

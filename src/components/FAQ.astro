@@ -1,0 +1,92 @@
+---
+// FAQ section - addresses common objections before conversion
+const faqs = [
+  {
+    question: "How secure is my code?",
+    answer: "Your code is never stored. We process everything in-memory only with zero retention. All data is encrypted with AES-256-GCM during processing, and we detect sensitive data (PHI, PII, credentials, API keys) to prevent accidental exposure."
+  },
+  {
+    question: "Can I use private GitHub repositories?",
+    answer: "Yes! Pro, Team, and Enterprise plans include private repository access via secure OAuth authentication. Your GitHub credentials are never stored, and we only request read-only access to the repositories you choose."
+  },
+  {
+    question: "What if my quality score is low?",
+    answer: "Quality scoring helps you improve. Each score includes specific suggestions across 5 criteria (Overview, Installation, Usage, API, Structure). You can regenerate docs with improvements, and our AI learns from feedback to deliver better results each time."
+  },
+  {
+    question: "What languages and frameworks do you support?",
+    answer: "We support 16+ languages including JavaScript, TypeScript, Python, Java, Go, Rust, C#, PHP, Ruby, Swift, Kotlin, and more. We also handle popular frameworks like React, Vue, Angular, Django, Flask, Spring Boot, and Express."
+  },
+  {
+    question: "How does multi-file documentation work?",
+    answer: "Our workspace lets you import multiple files from GitHub or local sources, then generate documentation across all files in one batch. We understand cross-file dependencies and create architecture diagrams showing how your code connects."
+  },
+  {
+    question: "What's included in the free tier?",
+    answer: "Free tier includes 10 docs/month (3/day), quality scoring, multi-language support, public GitHub repos, and sensitive data detection. It's perfect for trying CodeScribe AI and smaller projects."
+  },
+  {
+    question: "Can I cancel anytime?",
+    answer: "Yes, absolutely. All paid plans are month-to-month with no long-term commitment. Cancel anytime from your account settings. If you choose annual billing, you can cancel but won't receive a refund for unused months."
+  },
+  {
+    question: "Do you offer refunds?",
+    answer: "We offer a 14-day money-back guarantee on your first payment. If you're not satisfied within 14 days of your initial purchase, contact support@codescribeai.com for a full refund."
+  }
+];
+---
+
+<section class="py-20 sm:py-24 bg-slate-950">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+        Frequently Asked <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-300">Questions</span>
+      </h2>
+      <p class="text-lg text-slate-400">
+        Everything you need to know about CodeScribe AI
+      </p>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq, index) => (
+        <details class="group bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-slate-600 transition-colors">
+          <summary class="flex items-center justify-between p-6 cursor-pointer list-none">
+            <span class="text-lg font-semibold text-white pr-4">{faq.question}</span>
+            <svg class="w-6 h-6 text-slate-400 flex-shrink-0 transform group-open:rotate-180 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div class="px-6 pb-6 pt-2">
+            <p class="text-slate-300 leading-relaxed">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+
+    <!-- Still have questions CTA -->
+    <div class="mt-12 text-center p-8 bg-gradient-to-br from-slate-800/50 to-slate-800/30 border border-slate-700 rounded-2xl">
+      <h3 class="text-xl font-bold text-white mb-2">Still have questions?</h3>
+      <p class="text-slate-400 mb-4">Our team is here to help you get started</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a
+          href="mailto:support@codescribeai.com"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-medium transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Email Support
+        </a>
+        <a
+          href="https://app.codescribeai.com/signup"
+          class="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white rounded-xl font-medium transition-colors"
+        >
+          Try Free Trial
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -3,49 +3,39 @@
 // Screenshots gallery section - organized in workflow order
 const screenshots = [
   {
-    src: "/github-loader-react-hooks-lazy.png",
-    alt: "GitHub loader showing React hooks and lazy files selection",
+    src: "/github-loader-cropped.png",
+    alt: "GitHub import modal showing file tree with selected React hooks and lazy loading files",
     caption: "1. Select Files from GitHub"
   },
   {
-    src: "/pregen-react-hooks-lazy.png",
-    alt: "CodeScribe AI workspace with React hooks and lazy loading files ready for generation",
+    src: "/pregen-cropped.png",
+    alt: "Ready to generate panel with Quick Start checklist",
     caption: "2. Multi-File Workspace"
   },
   {
-    src: "/ingen-reactlazy.png",
-    alt: "Documentation generation in progress for React lazy loading",
+    src: "/ingen-cropped.png",
+    alt: "Real-time documentation generation with streaming progress",
     caption: "3. Generate Documentation"
   },
   {
-    src: "/quality-react-hooks.png",
-    alt: "Quality scoring breakdown showing A-F grades across 5 criteria",
+    src: "/quality-cropped.png",
+    alt: "Quality scoring breakdown with A-F grades across 5 criteria",
     caption: "4. Quality Scoring Analysis"
   },
   {
-    src: "/batch-summary-react-hooks-lazy.png",
-    alt: "Batch generation summary for React hooks and lazy loading docs",
+    src: "/batch-summary-cropped.png",
+    alt: "Batch documentation summary with statistics and results",
     caption: "5. Batch Summary Results"
   },
   {
-    src: "/mermaid-react-hook-sequence.png",
-    alt: "Mermaid architecture diagram generated for React hooks",
+    src: "/mermaid-cropped.png",
+    alt: "Architecture diagrams showing data flow and hook resolution",
     caption: "6. Architecture Diagrams"
   },
   {
-    src: "/raw-markdown.png",
-    alt: "Raw markdown preview of generated documentation",
-    caption: "7. Raw Markdown Preview"
-  },
-  {
-    src: "/final-doc.png",
-    alt: "Final rendered documentation output",
-    caption: "8. Final Documentation"
-  },
-  {
-    src: "/input-code-health.png",
-    alt: "Input code health analysis and metrics",
-    caption: "9. Code Health Analysis"
+    src: "/final-doc-cropped.png",
+    alt: "Final rendered documentation with project overview and features",
+    caption: "7. Final Documentation"
   }
 ];
 ---
@@ -54,10 +44,10 @@ const screenshots = [
   <div class="max-w-7xl mx-auto px-6">
     <div class="text-center max-w-3xl mx-auto mb-16">
       <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
-        See CodeScribe AI in <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-300">Action</span>
+        From GitHub to Docs in <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-300">7 Simple Steps</span>
       </h2>
       <p class="text-lg text-slate-400">
-        Real screenshots showing how CodeScribe AI transforms your code into professional documentation
+        Real screenshots showing your complete documentation workflow from import to publish
       </p>
     </div>
 
@@ -86,15 +76,23 @@ const screenshots = [
       </button>
 
       <!-- Screenshots Carousel with peek views -->
-      <div id="carousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 scrollbar-hide px-[5%]">
+      <div id="carousel" class="flex gap-4 sm:gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 scrollbar-hide px-[5%] sm:px-[10%]">
         {screenshots.map((screenshot, index) => (
-          <div class="carousel-slide flex-shrink-0 w-[90%] snap-center transition-all duration-300">
+          <div class="carousel-slide flex-shrink-0 w-[90%] sm:w-[80%] snap-center transition-all duration-300">
             <div class="group relative">
+              <!-- Step Indicator -->
+              <div class="absolute top-4 left-4 z-10 flex items-center gap-2 px-3 py-1.5 bg-slate-900/80 backdrop-blur-sm border border-slate-700 rounded-lg">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-2 h-2 rounded-full bg-purple-400"></div>
+                  <span class="text-xs font-semibold text-slate-200">Step {index + 1} of {screenshots.length}</span>
+                </div>
+              </div>
+
               <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
                 <img
                   src={screenshot.src}
                   alt={screenshot.alt}
-                  class="w-full max-h-[750px] object-contain transition-all duration-300 group-hover:brightness-110"
+                  class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                   loading="lazy"
                 />
               </div>
@@ -129,19 +127,39 @@ const screenshots = [
       const totalSlides = dots.length;
 
       function getCurrentSlideIndex() {
-        if (!carousel) return 0;
-        const scrollLeft = carousel.scrollLeft;
-        const slideWidth = carousel.offsetWidth;
-        return Math.round(scrollLeft / slideWidth);
+        if (!carousel || !slides.length) return 0;
+
+        // Find which slide is closest to the center of the viewport
+        const carouselRect = carousel.getBoundingClientRect();
+        const carouselCenter = carouselRect.left + carouselRect.width / 2;
+
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        slides.forEach((slide, index) => {
+          const slideRect = slide.getBoundingClientRect();
+          const slideCenter = slideRect.left + slideRect.width / 2;
+          const distance = Math.abs(slideCenter - carouselCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        return closestIndex;
       }
 
       function scrollToSlide(index) {
-        if (carousel) {
-          const slideWidth = carousel.offsetWidth;
-          carousel.scrollTo({
-            left: slideWidth * index,
-            behavior: 'smooth'
-          });
+        if (carousel && slides.length > 0) {
+          const slide = slides[index];
+          if (slide) {
+            slide.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'center'
+            });
+          }
         }
       }
 
