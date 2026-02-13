@@ -6,9 +6,7 @@ const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
 // Replace production URLs with environment-aware URLs
 const tiersWithEnvUrl = pricingTiers.map(tier => ({
   ...tier,
-  ctaLink: tier.ctaLink.startsWith('mailto:')
-    ? tier.ctaLink
-    : tier.ctaLink.replace('https://app.codescribeai.com', appUrl)
+  ctaLink: tier.ctaLink.replace('https://app.codescribeai.com', appUrl)
 }));
 ---
 
