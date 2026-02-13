@@ -1,0 +1,203 @@
+
+---
+// Screenshots gallery section - organized in workflow order
+const screenshots = [
+  {
+    src: "/github-loader-react-hooks-lazy.png",
+    alt: "GitHub loader showing React hooks and lazy files selection",
+    caption: "1. Select Files from GitHub"
+  },
+  {
+    src: "/pregen-react-hooks-lazy.png",
+    alt: "CodeScribe AI workspace with React hooks and lazy loading files ready for generation",
+    caption: "2. Multi-File Workspace"
+  },
+  {
+    src: "/ingen-reactlazy.png",
+    alt: "Documentation generation in progress for React lazy loading",
+    caption: "3. Generate Documentation"
+  },
+  {
+    src: "/batch-summary-react-hooks-lazy.png",
+    alt: "Batch generation summary for React hooks and lazy loading docs",
+    caption: "4. Batch Summary Results"
+  },
+  {
+    src: "/mermaid-react-hook-sequence.png",
+    alt: "Mermaid architecture diagram generated for React hooks",
+    caption: "5. Architecture Diagrams"
+  },
+  {
+    src: "/raw-markdown.png",
+    alt: "Raw markdown preview of generated documentation",
+    caption: "6. Raw Markdown Preview"
+  },
+  {
+    src: "/final-doc.png",
+    alt: "Final rendered documentation output",
+    caption: "7. Final Documentation"
+  },
+  {
+    src: "/input-code-health.png",
+    alt: "Input code health analysis and metrics",
+    caption: "8. Code Health Analysis"
+  }
+];
+---
+
+<section class="py-20 sm:py-24 bg-slate-900">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-4xl sm:text-5xl font-bold text-white mb-4">
+        See CodeScribe AI in <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-300">Action</span>
+      </h2>
+      <p class="text-lg text-slate-400">
+        Real screenshots showing how CodeScribe AI transforms your code into professional documentation
+      </p>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="relative">
+      <!-- Previous Arrow -->
+      <button
+        id="prev-btn"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-slate-800/90 hover:bg-purple-500 border border-slate-600 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+        aria-label="Previous screenshot"
+      >
+        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      <!-- Next Arrow -->
+      <button
+        id="next-btn"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-slate-800/90 hover:bg-purple-500 border border-slate-600 rounded-full flex items-center justify-center transition-all duration-200 shadow-lg"
+        aria-label="Next screenshot"
+      >
+        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <!-- Screenshots Carousel with peek views -->
+      <div id="carousel" class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 scrollbar-hide px-[5%]">
+        {screenshots.map((screenshot, index) => (
+          <div class="carousel-slide flex-shrink-0 w-[90%] snap-center transition-all duration-300">
+            <div class="group relative">
+              <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+                <img
+                  src={screenshot.src}
+                  alt={screenshot.alt}
+                  class="w-full max-h-[750px] object-contain transition-all duration-300 group-hover:brightness-110"
+                  loading="lazy"
+                />
+              </div>
+              <p class="mt-4 text-center text-sm font-medium text-slate-300">
+                {screenshot.caption}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Navigation Dots -->
+      <div class="flex justify-center gap-2 mt-4">
+        {screenshots.map((_, index) => (
+          <button
+            class="dot w-2 h-2 rounded-full bg-slate-600 hover:bg-purple-400 transition-colors"
+            data-index={index}
+            aria-label={`Go to screenshot ${index + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+
+    <script>
+      const carousel = document.getElementById('carousel');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const dots = document.querySelectorAll('.dot');
+      const slides = document.querySelectorAll('.carousel-slide');
+
+      let currentIndex = 0;
+      const totalSlides = dots.length;
+
+      function getCurrentSlideIndex() {
+        if (!carousel) return 0;
+        const scrollLeft = carousel.scrollLeft;
+        const slideWidth = carousel.offsetWidth;
+        return Math.round(scrollLeft / slideWidth);
+      }
+
+      function scrollToSlide(index) {
+        if (carousel) {
+          const slideWidth = carousel.offsetWidth;
+          carousel.scrollTo({
+            left: slideWidth * index,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      function updateDots() {
+        dots.forEach((dot, index) => {
+          if (index === currentIndex) {
+            dot.classList.remove('bg-slate-600');
+            dot.classList.add('bg-purple-400');
+          } else {
+            dot.classList.remove('bg-purple-400');
+            dot.classList.add('bg-slate-600');
+          }
+        });
+      }
+
+      function updateCarousel() {
+        currentIndex = getCurrentSlideIndex();
+        updateDots();
+      }
+
+      // Update on scroll
+      carousel?.addEventListener('scroll', () => {
+        updateCarousel();
+      });
+
+      prevBtn?.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          scrollToSlide(currentIndex - 1);
+        }
+      });
+
+      nextBtn?.addEventListener('click', () => {
+        if (currentIndex < totalSlides - 1) {
+          scrollToSlide(currentIndex + 1);
+        }
+      });
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          scrollToSlide(index);
+        });
+      });
+
+      // Initialize
+      updateCarousel();
+    </script>
+
+    <style>
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* All slides at full brightness */
+      .carousel-slide {
+        opacity: 1;
+        transform: scale(1);
+      }
+    </style>
+  </div>
+</section>
