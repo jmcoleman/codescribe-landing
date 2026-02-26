@@ -31,8 +31,8 @@ export const pricingTiers: PricingTier[] = [
       "Sensitive data detection",
       "Community support"
     ],
-    cta: "Start Free",
-    ctaLink: "https://app.codescribeai.com/signup",
+    cta: "Try Free — No Account Needed",
+    ctaLink: "https://app.codescribeai.com",
     highlight: false
   },
   {

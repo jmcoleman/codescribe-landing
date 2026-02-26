@@ -34,10 +34,16 @@ const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
           Log In
         </a>
         <a
+          href={appUrl}
+          class="hidden sm:inline-block px-4 py-2 text-purple-400 hover:text-purple-300 transition-colors text-sm font-medium"
+        >
+          Try it free
+        </a>
+        <a
           href={`${appUrl}/signup`}
           class="px-5 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg text-sm font-semibold transition-colors shadow-lg shadow-purple-500/20"
         >
-          Start Free
+          Sign Up
         </a>
       </div>
     </div>
