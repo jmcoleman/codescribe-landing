@@ -7,6 +7,7 @@ Marketing landing page for CodeScribe AI, hosted at `codescribeai.com`.
 - **Framework:** Astro 5.x (static site generation)
 - **Styling:** Tailwind CSS 4.x
 - **React:** React 19.x for interactive components
+- **Sitemap:** @astrojs/sitemap (auto-generated at `/sitemap-index.xml`)
 - **Deployment:** Vercel
 
 ## Project Structure
@@ -14,28 +15,36 @@ Marketing landing page for CodeScribe AI, hosted at `codescribeai.com`.
 ```
 codescribe-landing/
 ├── src/
+│   ├── assets/
+│   │   └── screenshots/        # App screenshot PNGs (optimized via Astro Image)
 │   ├── components/       # Astro components
 │   │   ├── Nav.astro           # Navigation bar
 │   │   ├── Hero.astro          # Hero section
-│   │   ├── ProductShowcase.astro  # Product demo/showcase
+│   │   ├── ProductShowcase.astro  # Product showcase screenshot
 │   │   ├── Features.astro      # Features grid
-│   │   ├── Screenshots.astro   # App screenshots section
+│   │   ├── Screenshots.astro   # App screenshots carousel
+│   │   ├── SocialProof.astro   # Testimonials / social proof
 │   │   ├── Pricing.astro       # Pricing tiers
+│   │   ├── FAQ.astro           # FAQ with FAQPage JSON-LD
 │   │   └── Footer.astro        # Footer with links
 │   ├── data/            # TypeScript data files
 │   │   ├── features.ts         # Feature descriptions
 │   │   └── pricing.ts          # Pricing tier data
 │   ├── layouts/         # Page layouts
-│   │   └── BaseLayout.astro    # Base HTML structure
+│   │   └── BaseLayout.astro    # Base HTML + SEO meta + JSON-LD schemas
 │   ├── pages/           # Routes
-│   │   ├── index.astro         # Homepage
-│   │   └── legal/
-│   │       ├── privacy.astro   # Privacy policy
-│   │       └── terms.astro     # Terms of service
+│   │   └── index.astro         # Homepage
 │   └── styles/          # Global styles
 │       └── global.css          # Tailwind + CSS variables
-├── public/              # Static assets (logo, demo videos, screenshots)
-└── astro.config.mjs     # Astro configuration with redirects
+├── public/              # Static assets
+│   ├── logo.svg                # Brand logo
+│   ├── favicon.svg / favicon.ico
+│   ├── og-image.png            # Social preview image (1200x630)
+│   ├── linkedin-logo.png       # LinkedIn company logo (400x400, transparent)
+│   ├── robots.txt              # Crawler directives
+│   └── python-demo-short.mp4  # Product demo video
+├── vercel.json          # Security headers (HSTS, CSP, COOP, XFO)
+└── astro.config.mjs     # Astro configuration with redirects and sitemap
 ```
 
 ## Development
@@ -79,8 +88,12 @@ Common app routes redirect to the subdomain:
 The `public/` directory contains:
 - **logo.svg** - CodeScribe AI logo
 - **favicon.svg / favicon.ico** - Site favicons
-- **sample-demo-{100,200}.mp4** - Product demo videos (optimized for web)
-- **github-load-reactfiles.png** - Feature screenshot
+- **og-image.png** - Social preview image (1200x630, used by og:image / twitter:image)
+- **linkedin-logo.png** - LinkedIn company page logo (400x400, transparent background)
+- **robots.txt** - Crawler directives with sitemap reference
+- **python-demo-short.mp4** - Product demo video (hero modal)
+
+App screenshots live in `src/assets/screenshots/` and are served via Astro's `<Image>` component for automatic WebP conversion and dimension optimization.
 
 ## Content Updates
 
@@ -92,9 +105,9 @@ Edit `src/data/pricing.ts` to update pricing tiers. **Must match** the pricing i
 
 Edit `src/data/features.ts` to update feature descriptions. **Only include validated features** from the main codebase.
 
-### Demo Videos
+### Demo Video
 
-Demo videos are located in `public/` and displayed in the ProductShowcase component. Update videos by replacing the `.mp4` files (keep original `.mov` files as source if needed).
+The demo video (`public/python-demo-short.mp4`) is displayed in the hero modal. Replace the `.mp4` file to update it.
 
 ## Related Documentation
 
