@@ -1,39 +1,48 @@
 
 ---
+import { Image } from 'astro:assets';
+import githubLoader from '../assets/screenshots/github-loader-cropped.png';
+import pregen from '../assets/screenshots/pregen-cropped.png';
+import ingen from '../assets/screenshots/ingen-cropped.png';
+import quality from '../assets/screenshots/quality-cropped.png';
+import batchSummary from '../assets/screenshots/batch-summary-cropped.png';
+import mermaid from '../assets/screenshots/mermaid-cropped.png';
+import finalDoc from '../assets/screenshots/final-doc-cropped.png';
+
 // Screenshots gallery section - organized in workflow order
 const screenshots = [
   {
-    src: "/github-loader-cropped.png",
+    src: githubLoader,
     alt: "GitHub import modal showing file tree with selected React hooks and lazy loading files",
     caption: "1. Select Files from GitHub"
   },
   {
-    src: "/pregen-cropped.png",
+    src: pregen,
     alt: "Ready to generate panel with Quick Start checklist",
     caption: "2. Multi-File Workspace"
   },
   {
-    src: "/ingen-cropped.png",
+    src: ingen,
     alt: "Real-time documentation generation with streaming progress",
     caption: "3. Generate Documentation"
   },
   {
-    src: "/quality-cropped.png",
+    src: quality,
     alt: "Quality scoring breakdown with A-F grades across 5 criteria",
     caption: "4. Quality Scoring Analysis"
   },
   {
-    src: "/batch-summary-cropped.png",
+    src: batchSummary,
     alt: "Batch documentation summary with statistics and results",
     caption: "5. Batch Summary Results"
   },
   {
-    src: "/mermaid-cropped.png",
+    src: mermaid,
     alt: "Architecture diagrams showing data flow and hook resolution",
     caption: "6. Architecture Diagrams"
   },
   {
-    src: "/final-doc-cropped.png",
+    src: finalDoc,
     alt: "Final rendered documentation with project overview and features",
     caption: "7. Final Documentation"
   }
@@ -87,10 +96,10 @@ const screenshots = [
               </div>
             </div>
             <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
-              <img
+              <Image
                 src={screenshots[screenshots.length - 2].src}
                 alt={screenshots[screenshots.length - 2].alt}
-                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                width={1280} class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                 loading="lazy"
               />
             </div>
@@ -110,10 +119,10 @@ const screenshots = [
               </div>
             </div>
             <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
-              <img
+              <Image
                 src={screenshots[screenshots.length - 1].src}
                 alt={screenshots[screenshots.length - 1].alt}
-                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                width={1280} class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                 loading="lazy"
               />
             </div>
@@ -134,10 +143,10 @@ const screenshots = [
                 </div>
               </div>
               <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
-                <img
+                <Image
                   src={screenshot.src}
                   alt={screenshot.alt}
-                  class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                  width={1280} class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                   loading="lazy"
                 />
               </div>
@@ -158,10 +167,10 @@ const screenshots = [
               </div>
             </div>
             <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
-              <img
+              <Image
                 src={screenshots[0].src}
                 alt={screenshots[0].alt}
-                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                width={1280} class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                 loading="lazy"
               />
             </div>
@@ -181,10 +190,10 @@ const screenshots = [
               </div>
             </div>
             <div class="relative rounded-xl overflow-hidden border border-slate-700 shadow-lg hover:shadow-2xl transition-all duration-300">
-              <img
+              <Image
                 src={screenshots[1].src}
                 alt={screenshots[1].alt}
-                class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
+                width={1280} class="w-full max-h-[400px] sm:max-h-[600px] object-contain transition-all duration-300 group-hover:brightness-110"
                 loading="lazy"
               />
             </div>
