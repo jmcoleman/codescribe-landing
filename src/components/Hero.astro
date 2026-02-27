@@ -28,6 +28,7 @@ const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-4">
         <a
           href={appUrl}
+          aria-label="Start using CodeScribe AI for free — no account needed"
           class="group px-10 py-5 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white text-lg rounded-xl font-bold shadow-2xl shadow-purple-500/30 transition-all duration-200 hover:scale-105 hover:shadow-purple-500/40 flex items-center gap-2"
         >
           Start Free
@@ -46,7 +47,7 @@ const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
           Watch Demo
         </button>
       </div>
-      <p class="text-sm text-slate-400 mb-8">
+      <p class="text-sm text-slate-300 mb-8">
         Or <a href={`${appUrl}/signup`} class="text-purple-400 hover:text-purple-300 underline decoration-purple-400/50 hover:decoration-purple-300 transition-colors">create a free account</a> to save your docs and unlock more features.
       </p>
 
@@ -156,6 +157,13 @@ const appUrl = import.meta.env.PUBLIC_APP_URL || 'https://app.codescribeai.com';
 
   .animate-blob {
     animation: blob 7s infinite;
+  }
+
+  /* Disable expensive blur animations on mobile to unblock LCP */
+  @media (max-width: 640px) {
+    .animate-blob {
+      animation: none;
+    }
   }
 
   .animation-delay-2000 {
